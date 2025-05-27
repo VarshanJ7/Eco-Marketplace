@@ -73,11 +73,14 @@ max-width: 600px; /* Set a maximum width */
 
 .middle-section p{   /*target words in middle*/
 cursor: pointer;
+margin:0; /* Remove default margin and back to middle*/
+  
 
 }
 
 .middle-section p:hover{
    text-decoration: underline;
+           
 }
 
 
@@ -118,4 +121,10 @@ width: 50px;
     margin-bottom:  100px ;
     display: inline-block;
     
+}
+
+
+/* style the dropdown box*/
+.dropdown-menu{
+
 }
