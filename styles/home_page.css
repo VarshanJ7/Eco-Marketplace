@@ -1,52 +1,63 @@
+
+
+
+
+
+
+*{
+
+  margin:0px;
+  padding:0px;
+}
+
 .middle-page{
     display:flex;
-    justify-content: space-between;
+    justify-content: center;
 
 }
 
-.woman-pic{
-    width:600px;
-    opacity: 0.4;
-}
 
+  
+ 
+  
 
-.woman-container{
-    display:inline-block;
-    
-}
-
-.home-bottom{
-    display:flex;
-  gap:50px;  /* Gaps stay the same even on large screens*/
-  max-width: 100%; /* “The container can grow up to the full width of its parent (like the screen), but never more than that*/
-  justify-content: center;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
-}
+  .home-bottom {
+    display: flex;
+    gap: 70px;
+    max-width: 100%;
+    justify-content: center;
+    gap: 200px;
+    flex-wrap: wrap;
+    margin-top: 200px;
+  }
+  
 
 
 
-body { 
+body {
     margin: 0;
     height: 3000px;
-    padding-top: 60px; /* Add padding to prevent content from being hidden behind the fixed header */
-   
-}   
-
-.header{
-background-color: bisque;
-height:60px;
-DISPLAY: flex;   
-flex-direction: row;
-justify-content: space-between;
-position:fixed;
-top:0;
-right: 0;
-left: 0;
-border: bottom width 1px; 
-border-bottom-style: solid;
-border-bottom-color: black;
-z-index: 1000; /* Ensure the header is above other content */
-}
+    padding-top: 60px;
+    background: white; /* smooth blend */
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    background-color: #206444; /* semi-transparent to match */
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* soft border */
+    padding: 0 30px;
+    backdrop-filter: blur(10px); /* modern glass effect */
+    z-index: 1000;
+  }
+  
 
 .left-section{   
      /*  Your .middle-section is using flex: 1, which automatically eats up all the remaining space between .left-section and .right-section. So if you add margin-right to .left-section, it gets overlapped or ignored by .middle-section expanding     */
@@ -74,7 +85,7 @@ max-width: 600px; /* Set a maximum width */
 .middle-section p{   /*target words in middle*/
 cursor: pointer;
 margin:0; /* Remove default margin and back to middle*/
-  
+color:white;
 
 }
 
@@ -83,6 +94,29 @@ margin:0; /* Remove default margin and back to middle*/
            
 }
 
+.middle-section .nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.middle-section .nav-link:hover {
+  text-decoration: underline;
+}
+
+
+.middle2-page {
+  
+  background-color: #f2f2f2;
+  margin-top: 50px;
+  padding: 30px;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+
 
 .right-section{
     
@@ -90,41 +124,105 @@ margin:0; /* Remove default margin and back to middle*/
     display: flex;
     align-items: center; /* Center items vertically */
     flex-shrink: 0; 
+    gap:10px;
+    justify-content: flex-end; 
 }
+
+
+
+
+
+
+
 
 
 
 
 .profile-icon{
-width: 50px;
+width: 30px;
 
 }
 
 
-.title{
-    color:green;
-    margin-left :20px;
-}
+.title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  
 
 
 .cart-icon{
+  
     width: 40px;
    margin-left: 20px;
   
 }
 
 
-.big-title{
-    margin-top: 100px;
-    margin-left: 20px;
-    font-size: 60px;
-    margin-bottom:  100px ;
-    display: inline-block;
-    
+.big-title {
+  margin-top: 100px;
+  margin-left: 60px;
+  font-size: 70px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: black;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: bounce 1.5s ease infinite;
+}
+
+/* Bounce keyframes */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(5px);
+  }
+}
+
+  
+
+  .card {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+  }
+
+
+
+.card-img-top {
+  width: 250px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
 }
 
 
-/* style the dropdown box*/
-.dropdown-menu{
-
+.right-section i {
+  color: white;
+  font-size: 24px;
 }
+
+
+
+
+
+
+
+  
+
+ 
+  
+  
+  
+
+
