@@ -106,6 +106,10 @@ color:white;
 
 .middle2-page {
   
+
+  display: flex;
+  gap:120px;
+  justify-content: center;
   background-color: #f2f2f2;
   margin-top: 50px;
   padding: 30px;
