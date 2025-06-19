@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    padding-top: 70px;
+    background: white;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 40px;
+  }
+  
+  .main-container {
+    
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .main-container:hover {
+    transform: translateY(-5px);
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+  }
+  
+  
+  .desc-container {
+    padding: 15px 20px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2f2f2f;
+    text-align: center; /* center text horizontally */
+    line-height: 1.5;
+  }
+  
+  .button-container {
+    padding: 15px 20px 20px;
+  }
+  
+  .button-container .btn {
+    background-color: #25D366;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .button-container .btn:hover {
+    background-color: #1ebe59;
+  }

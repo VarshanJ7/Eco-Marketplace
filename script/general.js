@@ -38,7 +38,7 @@ const imageUrl = reader.result; // final image URL after reading the file
             const clothes = JSON.parse(localStorage.getItem('clothes')) || []; // Get existing clothes or initialize an empty array
               clothes.push(newItem); // Add the new item to the clothes array
             localStorage.setItem('clothes', JSON.stringify(clothes)); // Save the updated clothes array to localStorage
-            window.location.href = "clothes.html"; // Redirect to the clothes page
+            window.location.href = "clothes.php"; // Redirect to the clothes page
         } else if (type === "Kitchen") {
             const sellKitchen = JSON.parse(localStorage.getItem("sellKitchen")) || [];
             sellKitchen.push(newItem);

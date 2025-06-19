@@ -194,27 +194,122 @@ width: 30px;
 
   
 
-  .card {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    text-align: center;
-  }
 
 
 
-.card-img-top {
-  width: 250px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
-}
+  /*stack area  */
 
 
 .right-section i {
   color: white;
   font-size: 24px;
 }
+
+
+
+.stack-area {
+  width: 100%;
+  height: 300vh;
+  position: relative;
+  background: white;
+  display: flex;
+}
+
+.left {
+  height: 100vh;
+  flex-basis: 50%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.right {
+  height: 100vh;
+  flex-basis: 50%;
+  position: sticky;
+  top: 0;
+}
+
+.title2 {
+  width: 420px;
+  font-size: 84px;
+  font-family: poppins;
+  font-weight: 700;
+  line-height: 88px;
+}
+
+.sub-title {
+  width: 420px;
+  font-family: poppins;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.sub-title button {
+  font-family: poppins;
+  font-size: 14px;
+  padding: 15px 30px;
+  background: black;
+  color: white;
+  border-radius: 8mm;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.card {
+  width: 350px;
+  height: 350px;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  position: absolute;
+  top: calc(50% - 175px);
+  left: calc(50% - 175px);
+  transition: 0.5s ease-in-out;
+  box-sizing: border-box;
+  padding: 35px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.card:nth-child(1) {
+  background: #4CAF50; /* Eco Green (Swap Effortlessly) */
+}
+.card:nth-child(2) {
+  background: #FFB74D; /* Warm Orange (Sell Sustainably) */
+}
+.card:nth-child(3) {
+  background: #64B5F6; /* Soft Blue (Buy Affordably) */
+}
+.card:nth-child(4) {
+  background: #A5D6A7; /* Light Green (Campus Friendly) */
+}
+
+
+.sub {
+  font-family: poppins;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.content {
+  font-family: poppins;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 54px;
+}
+
+.away {
+  transform-origin: bottom left;
+}
+
 
 
 
