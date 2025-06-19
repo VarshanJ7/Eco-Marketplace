@@ -1,7 +1,6 @@
 <?php
 echo "🛠️ submit_item.php is being run<br>";
 
-
 // ✅ Enable full error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -13,57 +12,49 @@ if ($conn->connect_error) {
 }
 echo "✅ Connected to MySQL successfully.<br>";
 
-// ✅ Check if image was uploaded correctly
-if (!isset($_FILES['itemImage']) || $_FILES['itemImage']['error'] !== 0) {
-    die("❌ Image upload failed. Error code: " . $_FILES['itemImage']['error']);
-}
-echo "✅ Image upload received.<br>";
+// 🔍 Check raw POST data
+echo "<pre>";
+var_dump($_POST);
+var_dump($_FILES);
+echo "</pre>";
 
-// ✅ Handle image upload
-$imageName = "uploads/" . basename($_FILES['itemImage']['name']);
-$imageTmp = $_FILES['itemImage']['tmp_name'];
-$targetPath = __DIR__ . "/" . $imageName;
+// ✅ Skip image for now
+$imageName = "uploads/test.jpg";
 
-if (!file_exists("uploads")) {
-    mkdir("uploads", 0777, true);
-    echo "✅ 'uploads' folder created.<br>";
-} else {
-    echo "✅ 'uploads' folder already exists.<br>";
-}
-
-if (!move_uploaded_file($imageTmp, $targetPath)) {
-    die("❌ Failed to move uploaded file. Path: $targetPath<br>Check folder permissions.");
-} else {
-    echo "✅ File successfully moved to: $targetPath<br>";
-}
-
-// ✅ Collect form data
+// ✅ Collect form data with fallbacks
 $userID = 1;
-$itemName = $_POST['itemName'];
+$itemName = $_POST['itemName'] ?? 'EmptyItem';
 $price = $_POST['price'] ?? 0.00;
-$purpose = strtolower($_POST['purpose']);
-$itemType = strtolower($_POST['itemType']);
-$phoneNumber = $_POST['phoneNumber'];
+$purpose = strtolower($_POST['purpose'] ?? 'Sell');
+$itemType = strtolower($_POST['itemType'] ?? 'others');
+$phoneNumber = $_POST['phoneNumber'] ?? '0000000000';
 
-echo "✅ Collected form data:<br>";
-echo "Item: $itemName<br>Price: $price<br>Purpose: $purpose<br>Type: $itemType<br>Phone: $phoneNumber<br>";
+// 🔍 Show collected values
+echo "<br>🧾 Collected values:<br>";
+echo "Item Name: $itemName<br>";
+echo "Price: $price<br>";
+echo "Purpose: $purpose<br>";
+echo "Type: $itemType<br>";
+echo "Phone: $phoneNumber<br>";
+echo "UserID: $userID<br>";
+echo "Image: $imageName<br>";
 
-// ✅ SQL now includes itemName
+// ✅ Build and run insert query
 $sql = "INSERT INTO items (itemName, userID, purpose, itemType, price, phoneNumber, imageURL)
         VALUES (?, ?, ?, ?, ?, ?, ?)";
-
 $stmt = $conn->prepare($sql);
+
 if (!$stmt) {
-    die("❌ SQL Prepare failed: " . $conn->error);
+    die("❌ Prepare failed: " . $conn->error);
 }
 
-// ✅ 'sissdss' matches the types in the INSERT
 $stmt->bind_param("sissdss", $itemName, $userID, $purpose, $itemType, $price, $phoneNumber, $imageName);
 
 if ($stmt->execute()) {
     echo "✅ Item successfully added to the database!<br>";
 } else {
-    echo "❌ Insert failed: " . $stmt->error;
+    echo "❌ Execute failed: " . $stmt->error . "<br>";
+    echo "⚠️ Try checking that userID $userID exists in the `users` table.";
 }
 
 $conn->close();
