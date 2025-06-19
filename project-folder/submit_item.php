@@ -1,4 +1,7 @@
 <?php
+echo "🛠️ submit_item.php is being run<br>";
+
+
 // ✅ Enable full error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -21,7 +24,6 @@ $imageName = "uploads/" . basename($_FILES['itemImage']['name']);
 $imageTmp = $_FILES['itemImage']['tmp_name'];
 $targetPath = __DIR__ . "/" . $imageName;
 
-// ✅ Create uploads folder if not exists
 if (!file_exists("uploads")) {
     mkdir("uploads", 0777, true);
     echo "✅ 'uploads' folder created.<br>";
@@ -29,7 +31,6 @@ if (!file_exists("uploads")) {
     echo "✅ 'uploads' folder already exists.<br>";
 }
 
-// ✅ Move uploaded file
 if (!move_uploaded_file($imageTmp, $targetPath)) {
     die("❌ Failed to move uploaded file. Path: $targetPath<br>Check folder permissions.");
 } else {
@@ -47,23 +48,23 @@ $phoneNumber = $_POST['phoneNumber'];
 echo "✅ Collected form data:<br>";
 echo "Item: $itemName<br>Price: $price<br>Purpose: $purpose<br>Type: $itemType<br>Phone: $phoneNumber<br>";
 
-// ✅ Prepare SQL insert
-$sql = "INSERT INTO items (userID, purpose, itemType, price, phoneNumber, imageURL)
-        VALUES (?, ?, ?, ?, ?, ?)";
+// ✅ SQL now includes itemName
+$sql = "INSERT INTO items (itemName, userID, purpose, itemType, price, phoneNumber, imageURL)
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
     die("❌ SQL Prepare failed: " . $conn->error);
 }
-$stmt->bind_param("issdss", $userID, $purpose, $itemType, $price, $phoneNumber, $imageName);
 
-// ✅ Execute and check result
+// ✅ 'sissdss' matches the types in the INSERT
+$stmt->bind_param("sissdss", $itemName, $userID, $purpose, $itemType, $price, $phoneNumber, $imageName);
+
 if ($stmt->execute()) {
     echo "✅ Item successfully added to the database!<br>";
 } else {
     echo "❌ Insert failed: " . $stmt->error;
 }
 
-// ✅ Close connection
 $conn->close();
 ?>
