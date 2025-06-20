@@ -4,7 +4,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM items WHERE itemType = 'clothes' AND purpose = 'sell'";
+$sql = "SELECT * FROM items WHERE LOWER(itemType) = 'clothes' AND LOWER(purpose) = 'sell'";
 $result = $conn->query($sql);
 ?>
 
@@ -17,10 +17,11 @@ $result = $conn->query($sql);
   <link rel="stylesheet" href="../styles/clothes.css">
 </head>
 <body>
+
 <div class="header"> 
 
  
-<div class="left-section">  <a href = "home_page.html" class="title">ECOMARKETPLACE </a>  </div>
+<div class="left-section">  <a href = "home_page.php" class="title">ECOMARKETPLACE </a>  </div>
 
 
 <div class="middle-section"> 
@@ -29,13 +30,13 @@ $result = $conn->query($sql);
         Browse items
       </p>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="kitchen.html">Kitchen</a></li>
+        <li><a class="dropdown-item" href="kitchen.php">Kitchen</a></li>
         <li><a class="dropdown-item" href="clothes.php">Clothes</a></li>
         <li><a class="dropdown-item" href="#">Others</a></li>
       </ul>
     </div>
   
-    <a href="swap.html"  style="cursor: pointer;  color: black; ">
+    <a href="swap.php"  style="cursor: pointer;  color: black; ">
       Swap offers
     </a>
     
@@ -103,19 +104,28 @@ $result = $conn->query($sql);
 
 </div>
 
-  <div class="clothes-grid" id="clothes-list">
-    <?php while ($row = $result->fetch_assoc()) { ?>
-      <div class="clothes-card">
-        <img src="../uploads/<?php echo htmlspecialchars($row['imageURL']); ?>" alt="Item Image">
-        <h5><?php echo htmlspecialchars($row['itemName']); ?></h5>
-        <p>RM <?php echo number_format($row['price'], 2); ?></p>
-        <p><i class="bi bi-whatsapp"></i> <?php echo htmlspecialchars($row['phoneNumber']); ?></p>
-      </div>
-    <?php } ?>
-  </div>
+<!--  CLOTHES DISPLAY SECTION -->
+<div class="clothes-grid" id="clothes-list">
+  <?php while ($row = $result->fetch_assoc()) { ?>
+    <div class="main-container">
+      <div class="img-container">
+      <img src="../project-folder/<?php echo htmlspecialchars($row['imageURL']); ?>" alt="Item Image">
 
-  <script src="../script/general.js"></script>
-  <script src="../script/clothes.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+      </div>
+      <div class="desc-container">
+        <?php echo htmlspecialchars($row['itemName']); ?><br>
+        <?php echo number_format($row['price'], 2); ?>
+      </div>
+      <div class="button-container">
+        <a href="https://wa.me/<?php echo htmlspecialchars($row['phoneNumber']); ?>" target="_blank" class="btn btn-success w-100">
+          <i class="bi bi-whatsapp"></i> WhatsApp Seller
+        </a>
+      </div>
+    </div>
+  <?php } ?>
+</div>
+
+<script src="../script/general.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

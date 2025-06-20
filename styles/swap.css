@@ -1,0 +1,23 @@
+.swap-grid  {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    column-gap: 20px;
+    row-gap: 40px;;
+}
+
+
+.main-container {
+   background-color: blue;
+   display: inline-block;
+    width: 400px;
+    margin-top: 40px;
+    
+}
+
+
+.shirt-pic {
+ width: 100%;
+ object-fit: cover;
+   
+  
+}

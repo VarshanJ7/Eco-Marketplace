@@ -30,7 +30,7 @@ ini_set('display_errors', 1);
   <div class="header"> 
 
  
-    <div class="left-section">  <a href = "home_page.html" class="title">ECOMARKETPLACE </a>  </div>
+    <div class="left-section">  <a href = "home_page.php" class="title">ECOMARKETPLACE </a>  </div>
     
     
     <div class="middle-section"> 
@@ -39,13 +39,13 @@ ini_set('display_errors', 1);
             Browse items
           </p>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="kitchen.html">Kitchen</a></li>
+            <li><a class="dropdown-item" href="kitchen.php">Kitchen</a></li>
             <li><a class="dropdown-item" href="clothes.php">Clothes</a></li>
             <li><a class="dropdown-item" href="#">Others</a></li>
           </ul>
         </div>
       
-        <a href="swap.html"  style="cursor: pointer;  color: black; ">
+        <a href="swap.php"  style="cursor: pointer;  color: black; ">
           Swap offers
         </a>
         
@@ -223,46 +223,12 @@ ini_set('display_errors', 1);
 
 
 <script src="../script/general.js"></script>
+<script src=../script/cards.js></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 
 
-<script>
-  let cards = document.querySelectorAll(".card");
-  let stackArea = document.querySelector(".stack-area");
 
-  function rotateCards() {
-    let angle = 0;
-    cards.forEach((card, index) => {
-      if (card.classList.contains("away")) {
-        card.style.transform =` translateY(-120vh) rotate(-48deg)`;
-      } else {
-        card.style.transform =` rotate(${angle}deg)`;
-        angle = angle - 10;
-        card.style.zIndex = cards.length - index;
-      }
-    });
-  }
-
-  rotateCards();
-
-  window.addEventListener("scroll", () => {
-    let distance = window.innerHeight * 0.5;
-    let topVal = stackArea.getBoundingClientRect().top;
-    let index = -1 * (topVal / distance + 1);
-    index = Math.floor(index);
-
-    for (let i = 0; i < cards.length; i++) {
-      if (i <= index) {
-        cards[i].classList.add("away");
-      } else {
-        cards[i].classList.remove("away");
-      }
-    }
-
-    rotateCards();
-  });
-</script>
 
 
 
