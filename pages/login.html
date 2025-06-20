@@ -1,6 +1,9 @@
 <!DOCTYPE >
 <html>
 <head>
+
+ 
+
     <link rel = "stylesheet" href="../styles/home_page.css">
 
      <!--bootstrap css-->
@@ -10,7 +13,7 @@
 
 
   <style>
-   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+  
 
 body {
   margin: 0;
@@ -23,26 +26,8 @@ body {
   flex-direction: column;
 }
 
-.header {
-  width: 100%;
-  background-color: #fce7c0;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 30px;
-  align-items: center;
-  border-bottom: 1px solid black;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-}
 
-.title {
-  font-size: 20px;
-  font-weight: bold;
-  color: green;
-  text-decoration: none;
-}
+
 
 .login-container {
   background-color: #ffffffcc; /* semi-transparent white */
@@ -132,7 +117,7 @@ button:hover {
           </p>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="kitchen.html">Kitchen</a></li>
-            <li><a class="dropdown-item" href=cloth">Clothes</a></li>
+            <li><a class="dropdown-item" href="clothes.php">Clothes</a></li>
             <li><a class="dropdown-item" href="#">Others</a></li>
           </ul>
         </div>
@@ -146,25 +131,26 @@ button:hover {
         <div class="dropdown">
             <p class="dropdown-toggle m-0" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer; margin: 0;">Add item</p>
             <ul class="dropdown-menu p-4" style="min-width: 300px;">
-              <form  id="add-item-form"  enctype="multipart/form-data" >
+              <form id="add-item-form"  action="../project-folder/submit_item.php" method="POST" enctype="multipart/form-data">   <!-- tells form send data to php file submit_item.php via -->
                 <div class="mb-2">
                   <label class="form-label">Item Name</label>
-                  <input type="text" class="form-control" id="item-name" placeholder="Enter item name">
+                  <input type="text" class="form-control" id="item-name" name="itemName"  placeholder="Enter item name"> <!-- PHP can only access values sent via name="itemName", not id -->
                 </div>
                 <div class="mb-2">
                   <label class="form-label">Item Value (RM)</label>
-                  <input type="number" class="form-control" id="item-price" placeholder="Enter value">
+                  <input type="number" class="form-control" id="item-price" 
+                  name="price" step="0.01"   placeholder="Enter value">
                 </div>
                 <div class="mb-2">
                   <label class="form-label" >Purpose</label>
-                  <select class="form-select" id="item-purpose">
+                  <select class="form-select" id="item-purpose" name="purpose">
                     <option value="Swap">Swap</option>
                     <option value="Sell">Sell</option>
                   </select>
                 </div>
                 <div class="mb-2">
                     <label class="form-label" >Type</label>
-                    <select class="form-select" id="item-type">
+                    <select class="form-select" id="item-type"  name="itemType" >
                       <option value="Kitchen">Kitchen</option>
                       <option value="Clothes">Clothes</option>
                       <option value="Others">Others</option>
@@ -172,11 +158,11 @@ button:hover {
                   </div>
                 <div class="mb-2">
                   <label class="form-label">WhatsApp Number</label>
-                  <input type="tel" class="form-control"  id="item-number" placeholder="e.g. 0123456789">
+                  <input type="tel" class="form-control"  id="item-number"  name="phoneNumber" placeholder="e.g. 0123456789">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Upload Item Image</label>
-                  <input type="file" class="form-control" accept="image/*" name="item_image"  id="item-image" required>
+                  <input type="file" class="form-control" accept="image/*" name="itemImage"  id="item-image" required>
                 </div>
                 <button type="submit" class="btn btn-success w-100">Submit</button>
               </form>
@@ -208,15 +194,18 @@ button:hover {
 
 
 
-  <div class="login-container">
-    <div class="logo">
-      <p>ECOMARKETPLACE</p>
+    <div class="login-container">
+      <div class="logo">
+        <p>ECOMARKETPLACE</p>
+      </div>
+    
+      <form action="../project-folder/login.php" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
     </div>
-
-    <input type="email" id="email" placeholder="E-mail">
-    <input type="password" id="password" placeholder="Password">
-    <button type="submit">Login</button>
-  </div>
+    
 
 
 
