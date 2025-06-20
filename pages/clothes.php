@@ -94,7 +94,7 @@ $result = $conn->query($sql);
 <div class="right-section"> <a href="login.html">
   <img src="../images/profile.svg" class="profile-icon" alt="Profile">
 </a>
- <img src="../images/cart.svg" class ="cart-icon"> </div>
+  </div>
 
 
 

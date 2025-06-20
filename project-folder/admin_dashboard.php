@@ -1,116 +1,140 @@
 <?php
-// ✅ Start session to track logged-in user's data
 session_start();
-
-// ✅ Check if the user is an admin (case-insensitive)
 if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
-    // 🔒 If not admin, block access
     die("Access denied. Only admins can view this page.");
 }
 
-// ✅ Connect to the database
 $conn = new mysqli("localhost", "root", "", "eco_marketplace");
 if ($conn->connect_error) {
-    die("❌ Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// ✅ If admin clicked a "Delete" button (with ?delete_id in URL), delete that item
 if (isset($_GET['delete_id'])) {
-    $deleteId = intval($_GET['delete_id']); // sanitize input
+    $deleteId = intval($_GET['delete_id']);
     $conn->query("DELETE FROM items WHERE itemID = $deleteId");
 }
 
-// ✅ Fetch all items for admin to view
 $itemsResult = $conn->query("SELECT * FROM items");
-
-// ✅ Fetch all users except Admins (so admin doesn’t delete other admins)
 $usersResult = $conn->query("SELECT * FROM users WHERE role != 'admin'");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - EcoMarketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        /* ✅ Dashboard styling */
         body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-            background: #f4f4f4;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f9fdfb;
+            padding: 30px;
+        }
+        .container {
+            max-width: 95%;
+            margin: auto;
         }
         h2 {
-            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #206444;
+            font-weight: 600;
         }
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 40px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
         }
-        table, th, td {
-            border: 1px solid #bbb;
+        th {
+            background-color: #eaf6ec;
+            color: #206444;
         }
         th, td {
-            padding: 12px;
-            text-align: left;
+            padding: 12px 15px;
         }
-        a.delete-link {
+        tr:hover {
+            background-color: #f2fdf4;
+        }
+        .delete-link {
             color: red;
-            text-decoration: none;
+            font-weight: bold;
         }
-        a.delete-link:hover {
+        .delete-link:hover {
             text-decoration: underline;
+        }
+        .dashboard-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d6a4f;
+            margin-bottom: 40px;
+        }
+        img {
+            border-radius: 6px;
+            max-width: 70px;
         }
     </style>
 </head>
 <body>
 
-<!-- ✅ Section: Items Table -->
-<h2>📦 All Listed Items</h2>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Purpose</th>
-        <th>Type</th>
-        <th>Price (RM)</th>
-        <th>Phone</th>
-        <th>Image</th>
-        <th>Action</th>
-    </tr>
-    <?php while ($item = $itemsResult->fetch_assoc()): ?>
-    <tr>
-        <td><?= $item['itemID'] ?></td>
-        <td><?= htmlspecialchars($item['itemName']) ?></td>
-        <td><?= $item['purpose'] ?></td>
-        <td><?= $item['itemType'] ?></td>
-        <td><?= number_format($item['price'], 2) ?></td>
-        <td><?= $item['phoneNumber'] ?></td>
-        <td><img src="../project-folder/<?= $item['imageURL'] ?>" width="80"></td>
-        <td>
-            <a class="delete-link" href="?delete_id=<?= $item['itemID'] ?>" onclick="return confirm('Are you sure?')">
-                Delete
-            </a>
-        </td>
-    </tr>
-    <?php endwhile; ?>
-</table>
+<div class="container">
+    <div class="dashboard-title">🌿 Admin Dashboard | EcoMarketplace</div>
 
-<!-- ✅ Section: Registered Users -->
-<h2>👥 Registered Users</h2>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Role</th>
-    </tr>
-    <?php while ($user = $usersResult->fetch_assoc()): ?>
-    <tr>
-        <td><?= $user['userID'] ?></td>
-        <td><?= htmlspecialchars($user['username']) ?></td>
-        <td><?= $user['role'] ?></td>
-    </tr>
-    <?php endwhile; ?>
-</table>
+    <h2>📦 All Listed Items</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Purpose</th>
+                <th>Type</th>
+                <th>Price (RM)</th>
+                <th>Phone</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($item = $itemsResult->fetch_assoc()): ?>
+            <tr>
+                <td><?= $item['itemID'] ?></td>
+                <td><?= htmlspecialchars($item['itemName']) ?></td>
+                <td><?= $item['purpose'] ?></td>
+                <td><?= $item['itemType'] ?></td>
+                <td><?= number_format($item['price'], 2) ?></td>
+                <td><?= $item['phoneNumber'] ?></td>
+                <td><img src="../project-folder/<?= $item['imageURL'] ?>" alt="item"></td>
+                <td>
+                    <a class="delete-link" href="?delete_id=<?= $item['itemID'] ?>" onclick="return confirm('Are you sure you want to delete this item?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+
+    <h2>👥 Registered Users</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($user = $usersResult->fetch_assoc()): ?>
+            <tr>
+                <td><?= $user['userID'] ?></td>
+                <td><?= htmlspecialchars($user['username']) ?></td>
+                <td><?= $user['role'] ?></td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

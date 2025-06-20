@@ -40,7 +40,7 @@ $stmt->bind_param("sissdss", $itemName, $userID, $purpose, $itemType, $price, $p
 
 if ($stmt->execute()) {
     echo "✅ Item added to DB successfully.<br>";
-    echo "<script>window.location.href = '../pages/clothes.php';</script>";
+    echo "<script>window.location.href = '../pages/home_page.php';</script>";
 } else {
     echo "❌ Insert failed: " . $stmt->error;
 }

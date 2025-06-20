@@ -8,38 +8,73 @@ $sql = "SELECT * FROM items WHERE LOWER(purpose) = 'swap'";
 $result = $conn->query($sql);
 ?>
 
-
-
-
-
 <!DOCTYPE html>
+<html>
+<head>
+  <title>Swap Offers - EcoMarketplace</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/home_page.css">
+  <style>
+    body {
+      background: #fff;
+      padding-top: 70px;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-<html> 
-
-     
-
-
-<head> 
-
-
-
-<!--load icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-
- <!--bootstrap css-->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous"> 
-
- <link rel = "stylesheet" href="../styles/swap.css"> <!--load swap.css for styling swap page -->
-
-  <link rel="stylesheet" href="../styles/home_page.css"> <!--load home page css for header and footer styling -->
-
+    
+  
+  .swap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 40px;
+  }
+  
+  .main-container {
+    
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .main-container:hover {
+    transform: translateY(-5px);
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+  }
+  
+  
+  .desc-container {
+    padding: 15px 20px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2f2f2f;
+    text-align: center; /* center text horizontally */
+    line-height: 1.5;
+  }
+  
+  .button-container {
+    padding: 15px 20px 20px;
+  }
+  
+  .button-container .btn {
+    background-color: #25D366;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .button-container .btn:hover {
+    background-color: #1ebe59;
+  }
+  </style>
 </head>
-
-
-
-<body> 
-
+<body>
 
 
 
@@ -119,7 +154,7 @@ $result = $conn->query($sql);
 <div class="right-section"> <a href="login.html">
   <img src="../images/profile.svg" class="profile-icon" alt="Profile">
 </a>
- <img src="../images/cart.svg" class ="cart-icon"> </div>
+  </div>
 
 
 
@@ -129,21 +164,17 @@ $result = $conn->query($sql);
 
 </div>
 
+<?php include("header.php"); ?> <!-- Optional: use your header block here -->
 
-     
-      
-   <!--show clothes for sale -->
-     
-     <div class="swap-grid"  >   
-
-     <?php while ($row = $result->fetch_assoc()) { ?>
+<div class="swap-grid">
+  <?php while ($row = $result->fetch_assoc()) { ?>
     <div class="main-container">
       <div class="img-container">
-        <img src="../<?php echo htmlspecialchars($row['imageURL']); ?>" alt="Item Image">
+      <img src="../project-folder/<?php echo htmlspecialchars($row['imageURL']); ?>" alt="Item Image">
       </div>
       <div class="desc-container">
         <?php echo htmlspecialchars($row['itemName']); ?><br>
-        Value: RM <?php echo number_format($row['price'], 2); ?>
+      
       </div>
       <div class="button-container">
         <a href="https://wa.me/<?php echo htmlspecialchars($row['phoneNumber']); ?>" target="_blank" class="btn btn-success w-100">
@@ -152,91 +183,9 @@ $result = $conn->query($sql);
       </div>
     </div>
   <?php } ?>
+</div>
 
-
-     </div>
-
-
-
-   
-   
-   
-     
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-<style> 
-
-
-.swap-grid  {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    column-gap: 20px;
-    row-gap: 40px;;
-}
-
-
-.main-container {
-   background-color: blue;
-   display: inline-block;
-    width: 400px;
-    margin-top: 40px;
-    
-}
-
-
-.shirt-pic {
- width: 100%;
- object-fit: cover;
-   
-  
-}
-
-
-
-
-</style>
-    
-
-
-
-
-<script src="../script/general.js"> </script> <!--load general first -->
-
-
-
-
-
-
-
-    <!--bootstrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-
+<script src="../script/general.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
