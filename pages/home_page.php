@@ -124,10 +124,20 @@ ini_set('display_errors', 1);
 
 
 <div class="middle2-page">
-  <div><img src="../images/sink-pic.jpeg"><p></p></div>
-  <div><img src="../images/clothes.jpeg"></div>
-  <div><img src="../images/sports.jpeg"></div>
+  <div class="image-card">
+    <img src="../images/sink-pic.jpeg" alt="Kitchen">
+    <div class="label">Kitchen</div>
+  </div>
+  <div class="image-card">
+    <img src="../images/clothes.jpeg" alt="Clothes">
+    <div class="label">Clothes</div>
+  </div>
+  <div class="image-card">
+    <img src="../images/sports.jpeg" alt="Sports">
+    <div class="label">Sports</div>
+  </div>
 </div>
+
 
 
 

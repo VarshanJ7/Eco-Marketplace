@@ -105,10 +105,8 @@ color:white;
 
 
 .middle2-page {
-  
-
   display: flex;
-  gap:120px;
+  gap: 40px;
   justify-content: center;
   background-color: #f2f2f2;
   margin-top: 50px;
@@ -117,8 +115,8 @@ color:white;
   text-align: center;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex-wrap: wrap;
 }
-
 
 
 
@@ -311,9 +309,47 @@ width: 30px;
 }
 
 
+.image-card {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
 
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
 
+
+.image-card .label {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+
+.image-card:hover .label {
+  opacity: 1;
+}
 
 
 
