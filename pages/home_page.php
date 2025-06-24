@@ -124,19 +124,21 @@ ini_set('display_errors', 1);
 
 
 <div class="middle2-page">
-  <div class="image-card">
-    <img src="../images/sink-pic.jpeg" alt="Kitchen">
-    <div class="label">Kitchen</div>
-  </div>
-  <div class="image-card">
-    <img src="../images/clothes.jpeg" alt="Clothes">
-    <div class="label">Clothes</div>
-  </div>
-  <div class="image-card">
-    <img src="../images/sports.jpeg" alt="Sports">
-    <div class="label">Sports</div>
-  </div>
+  <a href="kitchen.php" style="text-decoration: none; color: inherit;">
+    <div class="image-card">
+      <img src="../images/sink-pic.jpeg" alt="Kitchen">
+      <div class="label">Kitchen</div>
+    </div>
+  </a>
+
+  <a href="clothes.php" style="text-decoration: none; color: inherit;">
+    <div class="image-card">
+      <img src="../images/clothes.jpeg" alt="Clothes">
+      <div class="label">Clothes</div>
+    </div>
+  </a>
 </div>
+
 
 
 
@@ -206,13 +208,7 @@ ini_set('display_errors', 1);
         <p>FAQ</p>
         <p>Privacy Policy</p>
       </div>
-      <div class="col-md-3">
-        <h6 class="fw-bold">Follow Us</h6>
-        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="text-white me-3"><i class="bi bi-whatsapp"></i></a>
-        <a href="#" class="text-white"><i class="bi bi-envelope-fill"></i></a>
-      </div>
+     
     </div>
 
     <hr style="border-color: rgba(255,255,255,0.2);">

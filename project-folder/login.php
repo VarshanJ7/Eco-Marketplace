@@ -1,52 +1,47 @@
 <?php
-session_start(); //  Start a session to store user info after login
+session_start();
 
-//  Connect to the MySQL database
 $conn = new mysqli("localhost", "root", "", "eco_marketplace");
 if ($conn->connect_error) {
     die("❌ Database connection failed");
 }
 
-// ✅ Get the username and password entered in the login form via name attributes
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-// Prepare a SQL statement to find the user with that username
 $sql = "SELECT * FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username); // "s" = string
-$stmt->execute();  
-
-//  Get the result of the query
+$stmt->bind_param("s", $username);
+$stmt->execute();
 $result = $stmt->get_result();
 
-//  If a user with that username exists
 if ($user = $result->fetch_assoc()) {
+    $storedPass = $user['password'];
 
-    //  Compare the hashed password from DB with the entered one (also hashed)
-    if (hash('sha256', $password) === $user['password']) {
-
-        //  Save username and role in the session
+    // Check for plain password (user1) or SHA-256 hash (admin1/guest1)
+    if ($storedPass === $password || $storedPass === hash('sha256', $password)) {
         $_SESSION['username'] = $username;
-        $_SESSION['role'] = strtolower($user['role']); //  convert role to lowercase
+        $_SESSION['role'] = strtolower($user['role']);
 
-
-        //  Redirect based on the role
-        if ($user['role'] === 'Admin') {
-            header("Location: admin_dashboard.php"); // Admin goes here
-        } elseif ($user['role'] === 'User') {
-            header("Location: user_homepage.php"); // User goes here
-        } else {
-            header("Location: guest_homepage.php"); // Guest goes here
+        switch ($_SESSION['role']) {
+            case 'admin':
+                header("Location: admin_dashboard.php");
+                break;
+            case 'user':
+                header("Location: ../pages/home_page.php");
+                break;
+            case 'guest':
+                header("Location: guest_homepage.php");
+                break;
+            default:
+                echo "❌ Unknown role";
         }
-
     } else {
-        echo "❌ Wrong password"; // Entered password is wrong
+        echo "❌ Wrong password";
     }
-
 } else {
-    echo "❌ No such user"; // Username not found in DB
+    echo "❌ No such user";
 }
 
-$conn->close(); // ✅ Close the DB connection
+$conn->close();
 ?>
