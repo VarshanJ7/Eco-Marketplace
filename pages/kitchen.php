@@ -1,21 +1,19 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "eco_marketplace");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require __DIR__ . '/../includes/items.php';
 
-// Fetch items where itemType = kitchen
-$sql = "SELECT * FROM items WHERE itemType = 'kitchen'";
-$result = $conn->query($sql);
+$items = fetchItems("LOWER(purpose) = 'sell' AND LOWER(itemType) = 'kitchen'");
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kitchen - EcoMarketplace</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles/home_page.css">
-  <link rel="stylesheet" href="../styles/clothes.css">
+  <link rel="stylesheet" href="../styles/items.css">
 </head>
 <body>
 
@@ -33,7 +31,7 @@ $result = $conn->query($sql);
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="kitchen.php">Kitchen</a></li>
         <li><a class="dropdown-item" href="clothes.php">Clothes</a></li>
-        <li><a class="dropdown-item" href="#">Others</a></li>
+        <li><a class="dropdown-item" href="others.php">Others</a></li>
       </ul>
     </div>
   
@@ -105,28 +103,19 @@ $result = $conn->query($sql);
 
 </div>
 
-<!--  CLOTHES DISPLAY SECTION -->
-<div class="clothes-grid" >
-  <?php while ($row = $result->fetch_assoc()) { ?>
-    <div class="main-container">
-      <div class="img-container">
-      <img src="../project-folder/<?php echo htmlspecialchars($row['imageURL']); ?>" alt="Item Image">
-
-      </div>
-      <div class="desc-container">
-        <?php echo htmlspecialchars($row['itemName']); ?><br>
-        <?php echo number_format($row['price'], 2); ?>
-      </div>
-      <div class="button-container">
-        <a href="https://wa.me/<?php echo htmlspecialchars($row['phoneNumber']); ?>" target="_blank" class="btn btn-success w-100">
-          <i class="bi bi-whatsapp"></i> WhatsApp Seller
-        </a>
-      </div>
-    </div>
-  <?php } ?>
-</div>
+<?php renderItemsSection($items, [
+  'mode'              => 'sale',
+  'title'             => 'Kitchen',
+  'subtitle'          => 'Pre-loved kitchen gear from fellow students: cookers, kettles, cookware and more.',
+  'searchPlaceholder' => 'Search items or sellers…',
+  'sort'              => true,
+  'noun'              => 'item',
+  'nounPlural'        => 'items',
+  'emptyText'         => 'No items for sale here yet. Use <strong>Add item</strong> above to sell something!',
+]); ?>
 
 <script src="../script/general.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../script/items.js"></script>
 </body>
 </html>
