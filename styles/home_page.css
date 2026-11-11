@@ -363,3 +363,78 @@ width: 30px;
   
 
 
+
+
+/* ---------- "Add item" modal (project-folder/add_item_form.php, script/general.js) ---------- */
+
+.add-item-modal .modal-content {
+  border: none;
+  border-radius: 12px;
+}
+
+.add-item-modal .modal-header {
+  border-bottom: 1px solid #e5ece8;
+}
+
+.add-item-modal .modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #206444;
+}
+
+/* Undo page-level input styles (e.g. login.html styles every input[type="text"]) */
+.add-item-modal .form-control {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-left: 0.75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+}
+.add-item-modal .form-control:not(.is-invalid) { padding-right: 0.75rem; }
+
+.add-item-modal .form-label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.add-item-modal .form-control:focus,
+.add-item-modal .form-select:focus {
+  border-color: #206444;
+  box-shadow: 0 0 0 0.2rem rgba(32, 100, 68, 0.2);
+}
+
+.add-item-modal .form-control.is-invalid:focus,
+.add-item-modal .form-select.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.2);
+}
+
+.add-item-modal .modal-footer {
+  border-top: 1px solid #e5ece8;
+}
+
+.add-item-preview {
+  display: block;
+  margin-top: 8px;
+  width: 96px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #dfe6e2;
+}
+
+@media (max-width: 575.98px) {
+  .add-item-modal .modal-content { border-radius: 0; }
+}
+
+/* Success toast + highlight on the page the new item was posted to */
+.add-item-toast-container {
+  top: 70px;
+  z-index: 1100;
+}
+
+.item-card.item-card-new {
+  outline: 3px solid #25D366;
+  outline-offset: 2px;
+}

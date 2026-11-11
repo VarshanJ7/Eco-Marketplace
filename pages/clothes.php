@@ -41,46 +41,7 @@ $items = fetchItems("LOWER(purpose) = 'sell' AND LOWER(itemType) = 'clothes'");
     
 
 
-    <div class="dropdown">
-        <p class="dropdown-toggle m-0" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer; margin: 0;">Add item</p>
-        <ul class="dropdown-menu p-4" style="min-width: 300px;">
-          <form id="add-item-form"  action="../project-folder/submit_item.php" method="POST" enctype="multipart/form-data">   <!-- tells form send data to php file submit_item.php via -->
-            <div class="mb-2">
-              <label class="form-label">Item Name</label>
-              <input type="text" class="form-control" id="item-name" name="itemName"  placeholder="Enter item name"> <!-- PHP can only access values sent via name="itemName", not id -->
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Item Value (RM)</label>
-              <input type="number" class="form-control" id="item-price" 
-              name="price" step="0.01"   placeholder="Enter value">
-            </div>
-            <div class="mb-2">
-              <label class="form-label" >Purpose</label>
-              <select class="form-select" id="item-purpose" name="purpose">
-                <option value="Swap">Swap</option>
-                <option value="Sell">Sell</option>
-              </select>
-            </div>
-            <div class="mb-2">
-                <label class="form-label" >Type</label>
-                <select class="form-select" id="item-type"  name="itemType" >
-                  <option value="Kitchen">Kitchen</option>
-                  <option value="Clothes">Clothes</option>
-                  <option value="Others">Others</option>
-                </select>
-              </div>
-            <div class="mb-2">
-              <label class="form-label">WhatsApp Number</label>
-              <input type="tel" class="form-control"  id="item-number"  name="phoneNumber" placeholder="e.g. 0123456789">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Upload Item Image</label>
-              <input type="file" class="form-control" accept="image/*" name="itemImage"  id="item-image" required>
-            </div>
-            <button type="submit" class="btn btn-success w-100">Submit</button>
-          </form>
-        </ul>
-      </div>
+    <p class="dropdown-toggle m-0" id="add-item-trigger" role="button" tabindex="0" aria-haspopup="dialog" style="cursor: pointer; margin: 0;">Add item</p>
       
    
 
